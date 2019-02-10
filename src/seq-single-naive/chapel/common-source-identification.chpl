@@ -181,7 +181,7 @@ proc main() {
         for ii in 0..#w do {
           for jj in 0..#h do {
             if (abs(jj - maxLoc[1]) > 11 || abs(ii - maxLoc[2]) > 11) && !isnan(product(jj,ii).re){
-              sum += product(jj,ii).re;
+              sum += abs(product(jj,ii).re);
               totalNum += 1;
             }
           }
