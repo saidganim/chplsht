@@ -182,8 +182,14 @@ proc main() {
       writeln("Inner file63  " , j);
 
         sum /= totalNum;
+      writeln("Inner file64  sum " , sum);
+
         corrMatrix[i,j] = maxVal * maxVal / sum;
+      writeln("Inner file65  " , j);
+
         corrMatrix[j,i] = maxVal * maxVal / sum;
+      writeln("Inner file66  " , j);
+
       writeln("Inner file7  " , j);
 
         prnuDestroy(data2);
