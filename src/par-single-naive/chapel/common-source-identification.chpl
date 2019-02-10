@@ -90,7 +90,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  coforall i in 1..imageFileNames.size do {
+  for i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
@@ -113,7 +113,7 @@ proc main() {
         // }
         prnucomp = prnuc;
         
-      for j in i + 1..imageFileNames.size do {
+      coforall j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
@@ -128,7 +128,7 @@ proc main() {
 
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        coforall ii in 0..h - 1 do {
+        for ii in 0..h - 1 do {
           for jj in 0..w - 1 do {
             var newy = h - ii - 1;
             var newx = w - jj - 1;
