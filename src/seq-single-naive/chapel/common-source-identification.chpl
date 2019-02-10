@@ -101,6 +101,8 @@ proc main() {
   
   /* Create a domain for an image and allocate the image itself */
   for i in 0..imageFileNames.size do {
+    writeln("Outer file  " , i);
+
      const imageDomain: domain(2) = {0..#h,0..#w};
         var image : [imageDomain] RGB;
 
@@ -122,6 +124,7 @@ proc main() {
         
       for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
+      writeln("Inner file  " , j);
 
         /* Read in the first image. */
         readJPG(image2, imageFileNames.pop_front());
