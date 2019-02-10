@@ -79,7 +79,7 @@ proc main() {
   var overallTimer : Timer;
 
   const imageDomain: domain(2) = {0..#h,0..#w};
-  var images[imageFileNames.size] : [imageDomain] RGB; 
+  var images : [imageFileNames.size][imageDomain] RGB; 
   for i in 1..imageFileNames.size do{
     readJPG(images[i], imageFileNames[i]);
   }
