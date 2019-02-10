@@ -111,7 +111,7 @@ proc main() {
         //     prnucomp[jj, ii].im = 0.0;
         //   }
         // }
-        pruncomp = prunc;
+        prnucomp = prnuc;
         
       for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
