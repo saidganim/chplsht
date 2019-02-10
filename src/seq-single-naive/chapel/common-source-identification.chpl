@@ -142,10 +142,10 @@ proc main() {
     writeln("BEFORE ROTATING ", prnu2[99,99]);
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 0..h - 1 do {
-          for jj in 0..w - 1 do {
-            var newx = h - ii - 1;
-            var newy = w - jj - 1;
+        for ii in 0..w - 1 do {
+          for jj in 0..h - 1 do {
+            var newx = w - ii - 1;
+            var newy = h - jj - 1;
             prnu2rot[newx, newy].re = prnu2[ii, jj];
             prnu2rot[newx, newy].im = 0.0;
           }
