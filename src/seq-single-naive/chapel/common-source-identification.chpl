@@ -165,14 +165,10 @@ proc main() {
         // dotProduct(product, prnucomp, prnu2rot);
 
         forall (row, col) in imageDomain {
-          product[row, col].re = 0;
-          product[row, col].im = 0;
-          for i in 0..#w do{
             var tmp:complex = 0 + 0i;
             tmp.re = (prnucomp[row, i].re * prnu2rot[i, col].re - prnucomp[row, i].im * prnu2rot[i, col].im);
             tmp.im = prnucomp[row, i].im *  prnu2rot[i, col].re + prnucomp[row, i].re * prnu2rot[i, col].im;
-            product[row, col] += tmp;
-          }
+            product[row, col] = tmp;
         }
         writeln("After Cross corellation element 100 100 == " , product[100,100]);
 
