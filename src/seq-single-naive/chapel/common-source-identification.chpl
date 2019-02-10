@@ -19,6 +19,9 @@ use prnu;
 /* For FFT */
 use FFTW;
 
+/* For Math */
+use Math;
+
 /* Configuration parameters */
 config const imagedir : string = "images";
 config const writeOutput : bool = false;
@@ -149,12 +152,12 @@ proc main() {
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
         execute(planBackward);
         product = product / (w * h);
-        var (maxVal, maxLoc) = maxloc reduce (abs(product), product.domain);
+        var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
         var sum = 0;
         var totalNum = 0;
         for ii in 0..#w do {
           for jj in 0..#h do {
-            if abs(ii - maxLoc.x) > 11 || abs(jj - maxLoc.y) > 11{
+            if abs(ii - mod(maxLoc,w)) > 11 || abs(jj - (maxLoc / y):int) > 11{
               sum += product(ii,jj);
               totalNum += 1;
             }
