@@ -135,6 +135,9 @@ proc main() {
 
         prnuInit(h, w, data2);
         prnuExecute(prnu2, image2, data2);
+ writeln("Inner file3  " , j);
+      writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
+      writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
         // Rotating the second prnu image and representing it as matrix of complex numbers
         for ii in 0..#w do {
@@ -149,10 +152,7 @@ proc main() {
         
         var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
         var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
-      writeln("Inner file3  " , j);
-      writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
-      writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
-
+     
         execute(planForward);
         execute(planForward2);
         writeln("After FTT element 100 100 == " , prnucomp[100,100]);
