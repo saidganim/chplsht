@@ -150,6 +150,7 @@ proc main() {
             prnu2rot[newx, newy].im = 0.0;
           }
         }
+    writeln("BEFORE ROTATING ", prnu2rot[2899,3899]);
       writeln("BEFORE ROTATING ", prnu2rot[101,101]);
     writeln("BEFORE ROTATING ", prnu2rot[100,100]);
     writeln("BEFORE ROTATING ", prnu2rot[99,99]);
