@@ -73,7 +73,7 @@ proc main() {
   (h, w) = getDimensionsJPG(imageFileNames.front());
 
   /* Create a domain for the correlation matrix. */
-  const corrDomain : domain(2) = {1..n, 1..n} dmapped Cyclic(startIdx=(1,1));
+  const corrDomain : domain(2)  dmapped Cyclic(startIdx=(1,1)) = {1..n, 1..n};
   var corrMatrix : [corrDomain] real;
 
   var overallTimer : Timer;
