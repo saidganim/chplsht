@@ -100,7 +100,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 0..imageFileNames.size do {
+  for i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
@@ -150,23 +150,36 @@ proc main() {
         var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
         var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
       writeln("Inner file3  " , j);
+      writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
+      writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
         execute(planForward);
         execute(planForward2);
+        writeln("After FTT element 100 100 == " , prnucomp[100,100]);
+        writeln("After FTT rotated element 100 100 == " , prnu2rot[100,100]);
+
       writeln("Inner file4  " , j);
 
         /* allocate a prnu_data record */
         dotProduct(product, prnucomp, prnu2rot);
+        writeln("After Cross corellation element 100 100 == " , product[100,100]);
+
       writeln("Inner file5  " , j);
 
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
+
         execute(planBackward);
       writeln("Inner file6  " , j);
 
         product = product / (w * h);
+        writeln("After IFFT and scaling element 100 100 == " , product[100,100]);
+
       writeln("Inner file62  " , j);
 
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
+        
+      writeln("Index of peak  " , maxLoc);
+
       writeln("Inner file622  " , j);
 
         var sum:real = 0;
