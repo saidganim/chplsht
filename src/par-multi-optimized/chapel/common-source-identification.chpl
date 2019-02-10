@@ -73,7 +73,7 @@ proc main() {
   (h, w) = getDimensionsJPG(imageFileNames.front());
 
   /* Create a domain for the correlation matrix. */
-  const corrDomain : domain(2) dmapped;
+  const corrDomain : domain(2);
   var corrMatrix : [corrDomain] real;
 
   var overallTimer : Timer;
@@ -99,7 +99,7 @@ proc main() {
   
   /* Create a domain for an image and allocate the image itself */
   for i in 1..imageFileNames.size do 
-  on Locales[i] do {
+  on Locales[i]{
     writeln("Outer file  " , i);
 
         var image : [imageDomain] RGB; 
