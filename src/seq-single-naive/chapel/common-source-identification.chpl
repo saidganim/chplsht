@@ -151,14 +151,15 @@ proc main() {
         var totalNum = 0;
         for ii in 0..#w do {
           for jj in 0..#h do {
-            if abs(ii - maxLoc.x) > 11 || abs(jj - maxLoc.y) > 11 do{
+            if abs(ii - maxLoc.x) > 11 || abs(jj - maxLoc.y) > 11{
               sum += product(ii,jj);
               totalNum += 1;
             }
           }
         }
         sum /= totalNum;
-        corrMatrix[i,j] = corrMatrix[j,i] = maxVal * maxVal / sum;
+        corrMatrix[i,j] = maxVal * maxVal / sum;
+        corrMatrix[j,i] = maxVal * maxVal / sum;
         prnuDestroy(data2);
        
     }
