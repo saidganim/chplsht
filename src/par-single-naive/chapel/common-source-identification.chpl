@@ -113,7 +113,7 @@ proc main() {
         // }
         prnucomp = prnuc;
         
-      for j in i + 1..imageFileNames.size do {
+      coforall j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
