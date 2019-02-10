@@ -97,7 +97,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 0..imageFileNames.size() do {
+  for i in 0..imageFileNames.size do {
      const imageDomain: domain(2) = {0..#h,0..#w};
         var image : [imageDomain] RGB;
 
