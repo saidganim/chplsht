@@ -90,7 +90,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 1..imageFileNames.size do {
+  coforall i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
@@ -113,7 +113,7 @@ proc main() {
         // }
         prnucomp = prnuc;
         
-      coforall j in i + 1..imageFileNames.size do {
+      for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
