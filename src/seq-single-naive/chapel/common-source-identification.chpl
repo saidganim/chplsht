@@ -139,7 +139,7 @@ proc main() {
     writeln("BEFORE ROTATING ", prnu2[2899,3899]);
     writeln("BEFORE ROTATING ", prnu2[101,101]);
     writeln("BEFORE ROTATING ", prnu2[100,100]);
-    writeln("BEFORE ROTATING ", prnu2rot[99,99]);
+    writeln("BEFORE ROTATING ", prnu2[99,99]);
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
         for ii in 0..w - 1 do {
@@ -150,6 +150,9 @@ proc main() {
             prnu2rot[newx, newy].im = 0.0;
           }
         }
+      writeln("BEFORE ROTATING ", prnu2rot[101,101]);
+    writeln("BEFORE ROTATING ", prnu2rot[100,100]);
+    writeln("BEFORE ROTATING ", prnu2rot[99,99]);
 
       writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
       writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
