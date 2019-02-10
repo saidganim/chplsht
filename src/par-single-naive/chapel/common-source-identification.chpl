@@ -90,7 +90,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 1..imageFileNames.size do {
+  coforall i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
@@ -153,7 +153,7 @@ proc main() {
         /* allocate a prnu_data record */
         // dotProduct(product, prnucomp, prnu2rot);
 
-        coforall (row, col) in imageDomain {
+        forall (row, col) in imageDomain {
             var tmp:complex = 0 + 0i;
             tmp.re = (prnucomp[row, col].re * prnu2rot[row, col].re - prnucomp[row, col].im * prnu2rot[row, col].im);
             tmp.im = prnucomp[row, col].im *  prnu2rot[row, col].re + prnucomp[row, col].re * prnu2rot[row, col].im;
