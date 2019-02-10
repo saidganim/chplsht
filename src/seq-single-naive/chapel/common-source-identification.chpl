@@ -90,7 +90,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 0..#imageFileNames.size do {
+  for i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
