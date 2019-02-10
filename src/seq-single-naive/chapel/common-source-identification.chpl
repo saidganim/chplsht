@@ -140,7 +140,7 @@ proc main() {
           }
         }
         
-        var planForward = plan_dft(prnu, prnu, FFTW_FORWARD, FFTW_ESTIMATE);
+        var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
         var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
         execute(planForward);
         execute(planForward2);
@@ -180,6 +180,6 @@ proc main() {
     writeln("Writing output files...");
     write2DRealArray(corrMatrix, "corrMatrix");
     // for now, also write the prnu noise pattern, can be removed
-    write2DRealArray(prnu, "prnu");
+    // write2DRealArray(prnucomp, "prnu");
   }
 }
