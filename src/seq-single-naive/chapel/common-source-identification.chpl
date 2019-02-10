@@ -166,8 +166,8 @@ proc main() {
 
         forall (row, col) in imageDomain {
             var tmp:complex = 0 + 0i;
-            tmp.re = (prnucomp[row, i].re * prnu2rot[i, col].re - prnucomp[row, i].im * prnu2rot[i, col].im);
-            tmp.im = prnucomp[row, i].im *  prnu2rot[i, col].re + prnucomp[row, i].re * prnu2rot[i, col].im;
+            tmp.re = (prnucomp[row, col].re * prnu2rot[row, col].re - prnucomp[row, col].im * prnu2rot[row, col].im);
+            tmp.im = prnucomp[row, col].im *  prnu2rot[row, col].re + prnucomp[row, col].re * prnu2rot[row, col].im;
             product[row, col] = tmp;
         }
         writeln("After Cross corellation element 100 100 == " , product[100,100]);
