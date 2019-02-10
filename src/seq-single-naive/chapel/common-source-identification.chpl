@@ -136,7 +136,7 @@ proc main() {
         prnuInit(h, w, data2);
         prnuExecute(prnu2, image2, data2);
  writeln("Inner file3  " , j);
-    writeln("BEFORE ROTATING ", prnu2rot[2899,3899]);
+    writeln("BEFORE ROTATING ", prnu2[2899,3899]);
         // Rotating the second prnu image and representing it as matrix of complex numbers
         for ii in 1..#w do {
           for jj in 1..#h do {
