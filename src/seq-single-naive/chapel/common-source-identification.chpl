@@ -55,7 +55,6 @@ proc write2DRealArray(array : [] real, fileName :string) {
 proc dotProduct(ref C: [?DC] complex, ref A: [?DA] complex, ref B: [?DB] complex){
 
   forall (row, col) in DC {
-    // Zero out the value, in case C is reused.
     C[row, col].re = 0;
     C[row, col].im = 0;
     for i in DA.dim(2) do{
@@ -115,12 +114,13 @@ proc main() {
         prnuInit(h, w, data);
         prnuExecute(prnuc, image, data);
 
-        for ii in 0..#w do {
-          for jj in 0..#h do {
-            prnucomp[jj, ii].re = prnuc[jj, ii];
-            prnucomp[jj, ii].im = 0.0;
-          }
-        }
+        // for ii in 0..#w do {
+        //   for jj in 0..#h do {
+        //     prnucomp[jj, ii].re = prnuc[jj, ii];
+        //     prnucomp[jj, ii].im = 0.0;
+        //   }
+        // }
+        pruncomp = prunc;
         
       for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
