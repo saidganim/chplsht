@@ -16,6 +16,9 @@ use read_jpg;
 /* Compute PRNU noise patterns. */
 use prnu;
 
+/* For FFT */
+use FFTW;
+
 /* Configuration parameters */
 config const imagedir : string = "images";
 config const writeOutput : bool = false;
