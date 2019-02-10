@@ -138,8 +138,8 @@ proc main() {
  writeln("Inner file3  " , j);
     writeln("BEFORE ROTATING ", prnu2[2899,3899]);
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 1..#w do {
-          for jj in 1..#h do {
+        for ii in 0..w do {
+          for jj in 0..h do {
             var newx = w - ii;
             var newy = h - jj;
             prnu2rot[newx, newy].re = prnu2[ii, jj];
