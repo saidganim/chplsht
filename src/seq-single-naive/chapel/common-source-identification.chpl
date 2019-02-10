@@ -105,7 +105,7 @@ proc main() {
         readJPG(image, imageFileNames.pop_front());
         var data : prnu_data;
         var prnuc : [imageDomain] real;
-        var prnucomp : [imageDomain] real;
+        var prnucomp : [imageDomain] complex;
 
         prnuInit(h, w, data);
         prnuExecute(prnuc, image, data);
