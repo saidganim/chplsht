@@ -117,8 +117,8 @@ proc main() {
 
         for ii in 0..#w do {
           for jj in 0..#h do {
-            prnucomp[ii, jj].re = prnuc[ii, jj];
-            prnucomp[ii, jj].im = 0.0;
+            prnucomp[jj, ii].re = prnuc[ii, jj];
+            prnucomp[jj, ii].im = 0.0;
           }
         }
         
