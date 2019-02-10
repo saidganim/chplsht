@@ -149,7 +149,7 @@ proc main() {
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
         execute(planBackward);
         product = product / (w * h);
-        var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
+        var (maxVal, maxLoc) = maxloc reduce (abs(product), product.domain);
         var sum = 0;
         var totalNum = 0;
         for ii in 0..#w do {
