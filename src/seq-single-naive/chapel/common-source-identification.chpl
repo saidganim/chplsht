@@ -180,8 +180,8 @@ proc main() {
         var totalNum = 0;
         for ii in 0..#w do {
           for jj in 0..#h do {
-            if (abs(jj - maxLoc[1]) > 11 || abs(ii - maxLoc[2]) > 11) && !isnan(product(jj,ii).re){
-              sum += abs(product(jj,ii).re);
+            if (abs(jj - maxLoc[1]) > 5 || abs(ii - maxLoc[2]) > 5) && !isnan(product(jj,ii).re){
+              sum += product(jj,ii).re**2;
               totalNum += 1;
             }
           }
