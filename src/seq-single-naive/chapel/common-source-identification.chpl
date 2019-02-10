@@ -145,15 +145,24 @@ proc main() {
             prnu2rot[newx, newy].im = 0.0;
           }
         }
+      writeln("Inner file2  " , j);
         
         var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
         var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
+      writeln("Inner file3  " , j);
+
         execute(planForward);
         execute(planForward2);
+      writeln("Inner file4  " , j);
+
         /* allocate a prnu_data record */
         dotProduct(product, prnucomp, prnu2rot);
+      writeln("Inner file5  " , j);
+
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
         execute(planBackward);
+      writeln("Inner file6  " , j);
+
         product = product / (w * h);
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
         var sum:real = 0;
@@ -169,6 +178,8 @@ proc main() {
         sum /= totalNum;
         corrMatrix[i,j] = maxVal * maxVal / sum;
         corrMatrix[j,i] = maxVal * maxVal / sum;
+      writeln("Inner file7  " , j);
+
         prnuDestroy(data2);
        
     }
