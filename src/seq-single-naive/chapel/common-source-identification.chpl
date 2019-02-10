@@ -138,8 +138,8 @@ proc main() {
  writeln("Inner file3  " , j);
     
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 0..#w do {
-          for jj in 0..#h do {
+        for ii in 1..#w do {
+          for jj in 1..#h do {
             var newx = w - ii;
             var newy = h - jj;
             prnu2rot[newx, newy].re = prnu2[ii, jj];
@@ -147,7 +147,7 @@ proc main() {
           }
         }
 
-          writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
+      writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
       writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
       writeln("Inner file2  " , j);
