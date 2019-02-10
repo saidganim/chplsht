@@ -153,7 +153,7 @@ proc main() {
         execute(planBackward);
         product = product / (w * h);
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
-        var sum = 0;
+        var sum:real = 0;
         var totalNum = 0;
         for ii in 0..#w do {
           for jj in 0..#h do {
