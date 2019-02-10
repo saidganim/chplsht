@@ -90,14 +90,14 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  for i in 1..imageFileNames.size do {
+  for i in 0..#imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
         var image : [imageDomain] RGB;
 
         /* Read in the first image. */
-        readJPG(image, imageFileNames.pop_front());
+        readJPG(image, imageFileNames[i]);
         var data : prnu_data;
         var prnuc : [imageDomain] real;
         var prnucomp : [imageDomain] complex;
@@ -118,7 +118,7 @@ proc main() {
       writeln("Inner file  " , j);
 
         /* Read in the first image. */
-        readJPG(image2, imageFileNames.front());
+        readJPG(image2, imageFileNames[j]);
         var data2 : prnu_data;
         var prnu2 : [imageDomain] real;
         var prnu2rot : [imageDomain] complex;
