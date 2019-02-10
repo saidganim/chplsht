@@ -117,7 +117,7 @@ proc main() {
           }
         }
         
-      for j in i + 1..imageFileNames.size() do {
+      for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
