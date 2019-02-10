@@ -218,6 +218,7 @@ proc main() {
     }
      prnuDestroy(data);
   }
+      writeln("The end??? " );
 
   overallTimer.stop();
 
