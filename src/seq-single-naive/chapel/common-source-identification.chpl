@@ -172,6 +172,8 @@ proc main() {
 
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
         
+        writeln("peak coord " , maxLoc);
+        writeln("peak val " , maxVal);
 
 
         var sum:real = 0;
@@ -184,8 +186,10 @@ proc main() {
             }
           }
         }
+        writeln("Energy " ,sum);
 
         sum /= totalNum;
+        writeln("Energy weighted" ,sum);
 
         corrMatrix[i,j] = maxVal * maxVal / sum;
 
