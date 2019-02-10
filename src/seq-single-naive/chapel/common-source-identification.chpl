@@ -52,19 +52,10 @@ proc write2DRealArray(array : [] real, fileName :string) {
   }
 }
 
-proc dotProduct(ref C: [?DC] complex, ref A: [?DA] complex, ref B: [?DB] complex){
+// proc dotProduct(ref C: [?DC] complex, ref A: [?DA] complex, ref B: [?DB] complex){
 
-  forall (row, col) in DC {
-    C[row, col].re = 0;
-    C[row, col].im = 0;
-    for i in DA.dim(2) do{
-      var tmp:complex = 0 + 0i;
-      tmp.re = (A[row, i].re * B[i, col].re - A[row, i].im * B[i, col].im);
-      tmp.im = A[row, i].im *  B[i, col].re + A[row, i].re * B[i, col].im;
-      C[row, col] += tmp;
-    }
-  }
-}
+  
+// }
 
 proc main() {
   /* Obtain the images. */
@@ -171,7 +162,18 @@ proc main() {
       writeln("Inner file4  " , j);
 
         /* allocate a prnu_data record */
-        dotProduct(product, prnucomp, prnu2rot);
+        // dotProduct(product, prnucomp, prnu2rot);
+
+        forall (row, col) in imageDomain {
+          product[row, col].re = 0;
+          product[row, col].im = 0;
+          for i in 0..#w do{
+            var tmp:complex = 0 + 0i;
+            tmp.re = (prnucomp[row, i].re * prnu2rot[i, col].re - prnucomp[row, i].im * prnu2rot[i, col].im);
+            tmp.im = prnucomp[row, i].im *  prnu2rot[i, col].re + prnucomp[row, i].re * prnu2rot[i, col].im;
+            product[row, col] += tmp;
+          }
+        }
         writeln("After Cross corellation element 100 100 == " , product[100,100]);
 
       writeln("Inner file5  " , j);
