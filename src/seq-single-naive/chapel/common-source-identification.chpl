@@ -179,7 +179,7 @@ proc main() {
             }
           }
         }
-      writeln("Inner file63  " , j);
+      writeln("Inner file63  " , sum);
 
         sum /= totalNum;
       writeln("Inner file64  sum " , sum);
