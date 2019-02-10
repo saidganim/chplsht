@@ -46,6 +46,20 @@ proc write2DRealArray(array : [] real, fileName :string) {
   }
 }
 
+proc dotProduct(ref C: [?DC] complex, ref A: [?DA] complex, ref B: [?DB] complex){
+
+  forall (row, col) in DC {
+    // Zero out the value, in case C is reused.
+    C[row, col].re = C[row, col].im = 0;
+    for i in DA.dim(2) do{
+      var tmp:complex = 0 + 0i;
+      tmp.re = (A[row, i].re * B[i, col].re - A[row, i].im * B[i, col].im);
+      tmp.im = A[row, i].im *  B[i, col].re + A[row, i].re * B[i, col].im;
+      C[row, col] += tmp;
+    }
+  }
+}
+
 proc main() {
   /* Obtain the images. */
   var imageFileNames = getImageFileNames(imagedir);
@@ -79,19 +93,76 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  const imageDomain: domain(2) = {0..#h,0..#w};
-  var image : [imageDomain] RGB;
+  for i in 0..imageFileNames.size() do {
+     const imageDomain: domain(2) = {0..#h,0..#w};
+        var image : [imageDomain] RGB;
 
-  /* Read in the first image. */
-  readJPG(image, imageFileNames.front());
+        /* Read in the first image. */
+        readJPG(image, imageFileNames.pop_front());
+        var data : prnu_data;
+        var prnu : [imageDomain] real;
+        var prnucomp : [imageDomain] real;
 
-  /* allocate a prnu_data record */
-  var data : prnu_data;
-  var prnu : [imageDomain] real;
+        prnuInit(h, w, data);
+        prnuExecute(prnu, image, data);
 
-  prnuInit(h, w, data);
-  prnuExecute(prnu, image, data);
-  prnuDestroy(data);
+        for ii in 0..#w do {
+          for jj in 0..#h do {
+            prnucomp[ii, jj].re = prnu2[ii, jj];
+            prnucomp[ii, jj].im = 0.0;
+          }
+        }
+        
+      for j in i + 1..imageFileNames.size() do {
+        var image2 : [imageDomain] RGB;
+
+        /* Read in the first image. */
+        readJPG(image2, imageFileNames.pop_front());
+        var data2 : prnu_data;
+        var prnu2 : [imageDomain] real;
+        var prnu2rot : [imageDomain] complex;
+        var product : [imageDomain] complex;
+
+        prnuInit(h, w, data2);
+        prnuExecute(prnu2, image2, data2);
+
+        // Rotating the second prnu image and representing it as matrix of complex numbers
+        for ii in 0..#w do {
+          for jj in 0..#h do {
+            var newx = w - ii;
+            var newy = h - jj;
+            prnu2rot[newx, newy].re = prnu2[ii, jj];
+            prnu2rot[newx, newy].im = 0.0;
+          }
+        }
+        
+        var planForward = plan_dft(prnu, prnu, FFTW_FORWARD, FFTW_ESTIMATE);
+        var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
+        execute(planForward);
+        execute(planForward2);
+        /* allocate a prnu_data record */
+        dotProduct(product, prnucomp, prun2rot);
+        var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
+        execute(planBackward);
+        product = product / (w * h);
+        var (maxVal, maxLoc) = maxloc reduce zip(abs(A), A.domain);
+        var sum = 0;
+        var totalNum = 0;
+        for ii in 0..#w do {
+          for jj in 0..#h do {
+            if abs(ii - maxLoc.x) > 11 || abs(jj - maxLoc.y) > 11 do{
+              sum += product(ii,jj);
+              totalNum += 1;
+            }
+          }
+        }
+        sum /= totalNum;
+        corrMatrix[i,j] = corrMatrix[j,i] = maxVal * maxVal / sum;
+        prnuDestroy(data2);
+       
+    }
+     prnuDestroy(data);
+  }
 
   overallTimer.stop();
 
