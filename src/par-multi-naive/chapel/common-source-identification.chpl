@@ -1,6 +1,8 @@
 /* Use assertions. */
 use Assert;
 
+use CyclicDist;
+
 /* Use sorting. */
 use Sort;
 
