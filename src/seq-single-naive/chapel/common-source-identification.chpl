@@ -115,7 +115,6 @@ proc main() {
         
       for j in i + 1..imageFileNames.size do {
         var image2 : [imageDomain] RGB;
-      writeln("Inner file  " , j);
 
         /* Read in the first image. */
         readJPG(image2, imageFileNames[j]);
@@ -126,11 +125,7 @@ proc main() {
 
         prnuInit(h, w, data2);
         prnuExecute(prnu2, image2, data2);
- writeln("Inner file3  " , j);
-    writeln("BEFORE ROTATING ", prnu2[2899,3899]);
-    writeln("BEFORE ROTATING ", prnu2[101,101]);
-    writeln("BEFORE ROTATING ", prnu2[100,100]);
-    writeln("BEFORE ROTATING ", prnu2[99,99]);
+
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
         for ii in 0..h - 1 do {
@@ -141,15 +136,10 @@ proc main() {
             prnu2rot[newy, newx].im = 0.0;
           }
         }
-    writeln("BEFORE ROTATING ", prnu2rot[2899,3899]);
-      writeln("BEFORE ROTATING ", prnu2rot[101,101]);
-    writeln("BEFORE ROTATING ", prnu2rot[100,100]);
-    writeln("BEFORE ROTATING ", prnu2rot[99,99]);
 
       writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
       writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
-      writeln("Inner file2  " , j);
         
         var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
         var planForward2 = plan_dft(prnu2rot, prnu2rot, FFTW_FORWARD, FFTW_ESTIMATE);
@@ -159,7 +149,6 @@ proc main() {
         writeln("After FTT element 100 100 == " , prnucomp[100,100]);
         writeln("After FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
-      writeln("Inner file4  " , j);
 
         /* allocate a prnu_data record */
         // dotProduct(product, prnucomp, prnu2rot);
@@ -172,23 +161,18 @@ proc main() {
         }
         writeln("After Cross corellation element 100 100 == " , product[100,100]);
 
-      writeln("Inner file5  " , j);
 
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
 
         execute(planBackward);
-      writeln("Inner file6  " , j);
 
         product = product / (w * h);
         writeln("After IFFT and scaling element 100 100 == " , product[100,100]);
 
-      writeln("Inner file62  " , j);
 
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
         
-      writeln("Index of peak  " , maxLoc);
 
-      writeln("Inner file622  " , j);
 
         var sum:real = 0;
         var totalNum = 0;
@@ -200,25 +184,18 @@ proc main() {
             }
           }
         }
-      writeln("Inner file63  " , sum);
 
         sum /= totalNum;
-      writeln("Inner file64  sum " , sum);
 
         corrMatrix[i,j] = maxVal * maxVal / sum;
-      writeln("Inner file65  " , j);
 
         corrMatrix[j,i] = maxVal * maxVal / sum;
-      writeln("Inner file66  " , j);
-
-      writeln("Inner file7  " , j);
 
         prnuDestroy(data2);
        
     }
      prnuDestroy(data);
   }
-      writeln("The end??? " );
 
   overallTimer.stop();
 
