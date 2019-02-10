@@ -158,7 +158,7 @@ proc main() {
         for ii in 0..#w do {
           for jj in 0..#h do {
             if abs(ii - maxLoc[1]) > 11 || abs(jj - maxLoc[2]) > 11{
-              sum += product(ii,jj);
+              sum += product(ii,jj).re;
               totalNum += 1;
             }
           }
