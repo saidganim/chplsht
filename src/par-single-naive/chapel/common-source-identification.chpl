@@ -178,7 +178,7 @@ proc main() {
 
         var sum:real = 0;
         var totalNum = 0;
-        coforall ii in 0..#w do {
+        forall ii in 0..#w do {
           for jj in 0..#h do {
             if (abs(jj - maxLoc[1]) > 5 || abs(ii - maxLoc[2]) > 5) && !isnan(product(jj,ii).re){
               sum += product(jj,ii).re**2;
