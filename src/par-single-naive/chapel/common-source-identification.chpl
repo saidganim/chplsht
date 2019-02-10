@@ -90,7 +90,7 @@ proc main() {
    */
   
   /* Create a domain for an image and allocate the image itself */
-  coforall i in 1..imageFileNames.size do {
+  for i in 1..imageFileNames.size do {
     writeln("Outer file  " , i);
 
      const imageDomain: domain(2) = {0..#h,0..#w};
@@ -128,7 +128,7 @@ proc main() {
 
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 0..h - 1 do {
+        coforall ii in 0..h - 1 do {
           for jj in 0..w - 1 do {
             var newy = h - ii - 1;
             var newx = w - jj - 1;
@@ -178,7 +178,7 @@ proc main() {
 
         var sum:real = 0;
         var totalNum = 0;
-        for ii in 0..#w do {
+        coforall ii in 0..#w do {
           for jj in 0..#h do {
             if (abs(jj - maxLoc[1]) > 5 || abs(ii - maxLoc[2]) > 5) && !isnan(product(jj,ii).re){
               sum += product(jj,ii).re**2;
