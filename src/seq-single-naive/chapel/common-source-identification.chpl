@@ -50,7 +50,8 @@ proc dotProduct(ref C: [?DC] complex, ref A: [?DA] complex, ref B: [?DB] complex
 
   forall (row, col) in DC {
     // Zero out the value, in case C is reused.
-    C[row, col].re = C[row, col].im = 0;
+    C[row, col].re = 0;
+    C[row, col].im = 0;
     for i in DA.dim(2) do{
       var tmp:complex = 0 + 0i;
       tmp.re = (A[row, i].re * B[i, col].re - A[row, i].im * B[i, col].im);
