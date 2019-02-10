@@ -104,15 +104,15 @@ proc main() {
         /* Read in the first image. */
         readJPG(image, imageFileNames.pop_front());
         var data : prnu_data;
-        var prnu : [imageDomain] real;
+        var prnuc : [imageDomain] real;
         var prnucomp : [imageDomain] real;
 
         prnuInit(h, w, data);
-        prnuExecute(prnu, image, data);
+        prnuExecute(prnuc, image, data);
 
         for ii in 0..#w do {
           for jj in 0..#h do {
-            prnucomp[ii, jj].re = prnu2[ii, jj];
+            prnucomp[ii, jj].re = prnuc[ii, jj];
             prnucomp[ii, jj].im = 0.0;
           }
         }
