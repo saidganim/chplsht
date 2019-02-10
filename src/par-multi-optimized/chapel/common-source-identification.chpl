@@ -134,7 +134,7 @@ proc main() {
 
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 0..h - 1 do {
+        coforall ii in 0..h - 1 do {
           for jj in 0..w - 1 do {
             var newy = h - ii - 1;
             var newx = w - jj - 1;
@@ -143,8 +143,8 @@ proc main() {
           }
         }
 
-      writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
-      writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
+      // writeln("Before FTT element 100 100 == " , prnucomp[100,100]);
+      // writeln("Before FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
         
         var planForward = plan_dft(prnucomp, prnucomp, FFTW_FORWARD, FFTW_ESTIMATE);
@@ -152,20 +152,20 @@ proc main() {
      
         execute(planForward);
         execute(planForward2);
-        writeln("After FTT element 100 100 == " , prnucomp[100,100]);
-        writeln("After FTT rotated element 100 100 == " , prnu2rot[100,100]);
+        // writeln("After FTT element 100 100 == " , prnucomp[100,100]);
+        // writeln("After FTT rotated element 100 100 == " , prnu2rot[100,100]);
 
 
         /* allocate a prnu_data record */
         // dotProduct(product, prnucomp, prnu2rot);
 
-        coforall (row, col) in imageDomain {
+        forall (row, col) in imageDomain {
             var tmp:complex = 0 + 0i;
             tmp.re = (prnucomp[row, col].re * prnu2rot[row, col].re - prnucomp[row, col].im * prnu2rot[row, col].im);
             tmp.im = prnucomp[row, col].im *  prnu2rot[row, col].re + prnucomp[row, col].re * prnu2rot[row, col].im;
             product[row, col] = tmp;
         }
-        writeln("After Cross corellation element 100 100 == " , product[100,100]);
+        // writeln("After Cross corellation element 100 100 == " , product[100,100]);
 
 
         var planBackward = plan_dft(product, product, FFTW_BACKWARD, FFTW_ESTIMATE);
@@ -173,18 +173,18 @@ proc main() {
         execute(planBackward);
 
         product = product / (w * h);
-        writeln("After IFFT and scaling element 100 100 == " , product[100,100]);
+        // writeln("After IFFT and scaling element 100 100 == " , product[100,100]);
 
 
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
         
-        writeln("peak coord " , maxLoc);
-        writeln("peak val " , maxVal);
+        // writeln("peak coord " , maxLoc);
+        // writeln("peak val " , maxVal);
 
 
         var sum:real = 0;
         var totalNum = 0;
-        for ii in 0..#w do {
+        coforall ii in 0..#w do {
           for jj in 0..#h do {
             if (abs(jj - maxLoc[1]) > 5 || abs(ii - maxLoc[2]) > 5) && !isnan(product(jj,ii).re){
               sum += product(jj,ii).re**2;
