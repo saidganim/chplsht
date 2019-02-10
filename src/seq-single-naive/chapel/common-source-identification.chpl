@@ -164,7 +164,11 @@ proc main() {
       writeln("Inner file6  " , j);
 
         product = product / (w * h);
+      writeln("Inner file62  " , j);
+
         var (maxVal, maxLoc) = maxloc reduce zip(abs(product), product.domain);
+      writeln("Inner file622  " , j);
+
         var sum:real = 0;
         var totalNum = 0;
         for ii in 0..#w do {
@@ -175,6 +179,8 @@ proc main() {
             }
           }
         }
+      writeln("Inner file63  " , j);
+
         sum /= totalNum;
         corrMatrix[i,j] = maxVal * maxVal / sum;
         corrMatrix[j,i] = maxVal * maxVal / sum;
