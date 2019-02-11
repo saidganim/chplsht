@@ -109,6 +109,13 @@ proc main() {
         var prnuc : [imageDomain] real;
         var prnucomp : [imageDomain] complex;
 
+
+        var data2 : prnu_data;
+        var prnu2 : [imageDomain] real;
+        var prnu2rot : [imageDomain] complex;
+        var product : [imageDomain] complex;
+        prnuInit(h, w, data2);
+
         prnuInit(h, w, data);
         prnuExecute(prnuc, image, data);
 
@@ -125,12 +132,7 @@ proc main() {
 
         /* Read in the first image. */
         image2 = images[j];
-        var data2 : prnu_data;
-        var prnu2 : [imageDomain] real;
-        var prnu2rot : [imageDomain] complex;
-        var product : [imageDomain] complex;
-
-        prnuInit(h, w, data2);
+        
         prnuExecute(prnu2, image2, data2);
 
   
@@ -209,10 +211,11 @@ corrMatrix[i,j] = 0.0;
         }
         writeln(i - 1, " : Energy weighted " ,sum);
 
-        prnuDestroy(data2);
         writeln(i - 1, " : Energy weighted " ,sum);
        
     }
+        prnuDestroy(data2);
+
      prnuDestroy(data);
   }
 
