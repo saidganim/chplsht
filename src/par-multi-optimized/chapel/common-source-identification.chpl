@@ -196,22 +196,17 @@ proc main() {
             }
           }
         }
-        writeln(i - 1, " : Energy " ,sum);
+        // writeln(i - 1, " : Energy " ,sum);
 
         sum /= totalNum;
-        writeln(i - 1, " : Energy weighted " ,sum , " locale ", corrMatrix[i,j].locale.id);
-corrMatrix[i,j] = 0.0;
-        on corrMatrix[i,j] {
-        writeln(i - 1, " : Energy weighted " ,sum);
+        // writeln(i - 1, " : Energy weighted " ,sum , " locale ", corrMatrix[i,j].locale.id);
+        // on corrMatrix[i,j] {
 
           corrMatrix[i,j] = maxVal * maxVal / sum;
-        writeln(i - 1, " : Energy weighted " ,sum);
 
           corrMatrix[j,i] = maxVal * maxVal / sum;
-        }
-        writeln(i - 1, " : Energy weighted " ,sum);
+        // }
 
-        writeln(i - 1, " : Energy weighted " ,sum);
        
     }
         prnuDestroy(data2);
