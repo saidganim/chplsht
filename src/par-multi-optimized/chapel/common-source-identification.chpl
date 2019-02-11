@@ -73,8 +73,8 @@ proc main() {
   (h, w) = getDimensionsJPG(imageFileNames.front());
 
   /* Create a domain for the correlation matrix. */
-  const corrDomain : domain(2);
-  var corrMatrixGlobal : [corrDomain] real;
+  const corrDomain : domain(2) =  = {1..n, 1..n};
+  var corrMatrix : [corrDomain] real;
 
   var overallTimer : Timer;
 
@@ -100,8 +100,6 @@ proc main() {
   /* Create a domain for an image and allocate the image itself */
   for i in 1..imageFileNames.size do  
   on Locales[i - 1] {
-    const corrDomain : domain(2) = {1..n, 1..n};
-  var corrMatrix : [corrDomain] real;
     writeln("Outer file  " , i);
 
         var image : [imageDomain] RGB; 
@@ -219,14 +217,14 @@ corrMatrix[i,j] = 0.0;
 
   overallTimer.stop();
 
-  writeln("The first value of the corrMatrix is: ", corrMatrixGlobal[2,1]);
+  writeln("The first value of the corrMatrix is: ", corrMatrix[2,1]);
   writeln("Time: ", overallTimer.elapsed(), "s");
   var nrCorrelations = (n * (n - 1)) / 2;
   writeln("Throughput: ", nrCorrelations / overallTimer.elapsed(), " corrs/s");
 
   if (writeOutput) {
     writeln("Writing output files...");
-    write2DRealArray(corrMatrixGlobal, "corrMatrix");
+    write2DRealArray(corrMatrix, "corrMatrix");
     // for now, also write the prnu noise pattern, can be removed
     // write2DRealArray(prnucomp, "prnu");
   }
