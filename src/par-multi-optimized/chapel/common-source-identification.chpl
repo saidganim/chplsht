@@ -1,7 +1,7 @@
 /* Use assertions. */
 use Assert;
 
-use BlockDist;;
+use CyclicDist;
 
 /* Use sorting. */
 use Sort;
@@ -64,13 +64,7 @@ proc main() {
   var imageFileNames = getImageFileNames(imagedir);
 
   /* n represents the number of images that have to be correlated. */
-    var n = imageFileNames.size;
-
-  /* h, w will represent the height and width of an image or PRNU noise pattern 
-   * throughout the code.
-   */
-  var h, w : int;
-  (h, w) = getDimensionsJPG(imageFileNames.front());
+ 
 
   /* Create a domain for the correlation matrix. */
   const corrDomain : domain(2);
@@ -79,10 +73,10 @@ proc main() {
   var overallTimer : Timer;
 
   const imageDomain: domain(2) = {0..#h,0..#w};
-  // var images : [imageFileNames.size][imageDomain] RGB dmapped Block(); 
-  // for i in 1..imageFileNames.size do{
-  //   readJPG(images[i], imageFileNames[i]);
-  // }
+  var images : [imageFileNames.size][imageDomain] RGB; 
+  for i in 1..imageFileNames.size do{
+    readJPG(images[i], imageFileNames[i]);
+  }
 
   writeln("Running Common Source Identification...");
   writeln("  ", n, " images");
@@ -110,7 +104,7 @@ proc main() {
     writeln("Outer file  " , i);
 
         var image : [imageDomain] RGB; 
-        readJPG(image, imageFileNames[i]);
+        image = images[i];
         /* Read in the first image. */
         var data : prnu_data;
         var prnuc : [imageDomain] real;
@@ -131,7 +125,7 @@ proc main() {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
-        readJPG(image2, imageFileNames[j]);
+        image2 = images[j];
         var data2 : prnu_data;
         var prnu2 : [imageDomain] real;
         var prnu2rot : [imageDomain] complex;
