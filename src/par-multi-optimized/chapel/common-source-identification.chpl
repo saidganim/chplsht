@@ -196,7 +196,7 @@ proc main() {
         writeln(i - 1, " : Energy " ,sum);
 
         sum /= totalNum;
-        writeln(i - 1, " : Energy weighted " ,sum);
+        writeln(i - 1, " : Energy weighted " ,sum , " locale ", corrMatrix[i,j].locale.id);
 
         on corrMatrix[i,j] {
         writeln(i - 1, " : Energy weighted " ,sum);
