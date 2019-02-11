@@ -131,7 +131,7 @@ proc main() {
         var image2 : [imageDomain] RGB;
 
         /* Read in the first image. */
-        image2 = images[j];
+        readJPG(image2, imageFileNames[j]);
         var data2 : prnu_data;
         var prnu2 : [imageDomain] real;
         var prnu2rot : [imageDomain] complex;
