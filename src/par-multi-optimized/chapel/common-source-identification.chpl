@@ -160,7 +160,8 @@ proc main() {
         /* allocate a prnu_data record */
         // dotProduct(product, prnucomp, prnu2rot);
 
-        coforall (row, col) in imageDomain {
+        coforall row in 0..#h do
+          for col in 0..#w do {
             var tmp:complex = 0 + 0i;
             tmp.re = (prnucomp[row, col].re * prnu2rot[row, col].re - prnucomp[row, col].im * prnu2rot[row, col].im);
             tmp.im = prnucomp[row, col].im *  prnu2rot[row, col].re + prnucomp[row, col].re * prnu2rot[row, col].im;
