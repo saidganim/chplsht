@@ -73,7 +73,7 @@ proc main() {
   (h, w) = getDimensionsJPG(imageFileNames.front());
 
   /* Create a domain for the correlation matrix. */
-  const corrDomain : domain(2) = {1..n, 1..n};
+  const corrDomain : domain(2) dmapped BlockCyclic(startIdx=1,blocksize=(1,1)) = {1..n, 1..n};
   var corrMatrix : [corrDomain] real;
 
   var overallTimer : Timer;
@@ -200,12 +200,12 @@ proc main() {
 
         sum /= totalNum;
         // writeln(i - 1, " : Energy weighted " ,sum , " locale ", corrMatrix[i,j].locale.id);
-        on corrMatrix[i,j] {
+        // on corrMatrix[i,j] {
 
           corrMatrix[i,j] = maxVal * maxVal / sum;
 
           corrMatrix[j,i] = maxVal * maxVal / sum;
-        }
+        // }
 
        
     }
