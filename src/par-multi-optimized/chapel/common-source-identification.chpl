@@ -79,10 +79,10 @@ proc main() {
   var overallTimer : Timer;
 
   const imageDomain: domain(2) = {0..#h,0..#w};
-  var images : [imageFileNames.size][imageDomain] RGB dmapped Block(); 
-  for i in 1..imageFileNames.size do{
-    readJPG(images[i], imageFileNames[i]);
-  }
+  // var images : [imageFileNames.size][imageDomain] RGB dmapped Block(); 
+  // for i in 1..imageFileNames.size do{
+  //   readJPG(images[i], imageFileNames[i]);
+  // }
 
   writeln("Running Common Source Identification...");
   writeln("  ", n, " images");
@@ -110,7 +110,7 @@ proc main() {
     writeln("Outer file  " , i);
 
         var image : [imageDomain] RGB; 
-        image = images[i];
+        readJPG(image, imageFileNames[i]);
         /* Read in the first image. */
         var data : prnu_data;
         var prnuc : [imageDomain] real;
