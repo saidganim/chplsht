@@ -64,7 +64,13 @@ proc main() {
   var imageFileNames = getImageFileNames(imagedir);
 
   /* n represents the number of images that have to be correlated. */
- 
+    var n = imageFileNames.size;
+
+  /* h, w will represent the height and width of an image or PRNU noise pattern 
+   * throughout the code.
+   */
+  var h, w : int;
+  (h, w) = getDimensionsJPG(imageFileNames.front());
 
   /* Create a domain for the correlation matrix. */
   const corrDomain : domain(2);
