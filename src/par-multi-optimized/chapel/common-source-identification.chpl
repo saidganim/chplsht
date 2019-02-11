@@ -193,10 +193,10 @@ proc main() {
             }
           }
         }
-        writeln("Energy " ,sum);
+        writeln(i, " : Energy " ,sum);
 
         sum /= totalNum;
-        writeln("Energy weighted " ,sum);
+        writeln(i, " : Energy weighted " ,sum);
 
         on corrMatrix {
           corrMatrix[i,j] = maxVal * maxVal / sum;
