@@ -200,12 +200,12 @@ proc main() {
 
         sum /= totalNum;
         // writeln(i - 1, " : Energy weighted " ,sum , " locale ", corrMatrix[i,j].locale.id);
-        // on corrMatrix[i,j] {
+        on corrMatrix[i,j] {
 
           corrMatrix[i,j] = maxVal * maxVal / sum;
 
           corrMatrix[j,i] = maxVal * maxVal / sum;
-        // }
+        }
 
        
     }
