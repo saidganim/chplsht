@@ -74,7 +74,7 @@ proc main() {
 
   /* Create a domain for the correlation matrix. */
   const corrDomain : domain(2);
-  var corrMatrix : [corrDomain] real;
+  var corrMatrixGlobal : [corrDomain] real;
 
   var overallTimer : Timer;
 
@@ -100,6 +100,8 @@ proc main() {
   /* Create a domain for an image and allocate the image itself */
   for i in 1..imageFileNames.size do  
   on Locales[i - 1] {
+    const corrDomain : domain(2);
+  var corrMatrix : [corrDomain] real;
     writeln("Outer file  " , i);
 
         var image : [imageDomain] RGB; 
