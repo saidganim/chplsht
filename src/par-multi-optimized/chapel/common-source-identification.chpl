@@ -219,7 +219,7 @@ corrMatrix[i,j] = 0.0;
 
   overallTimer.stop();
 
-  writeln("The first value of the corrMatrix is: ", corrMatrix[2,1]);
+  writeln("The first value of the corrMatrix is: ", corrMatrixGlobal[2,1]);
   writeln("Time: ", overallTimer.elapsed(), "s");
   var nrCorrelations = (n * (n - 1)) / 2;
   writeln("Throughput: ", nrCorrelations / overallTimer.elapsed(), " corrs/s");
