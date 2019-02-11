@@ -1,7 +1,7 @@
 /* Use assertions. */
 use Assert;
 
-use CyclicDist;
+use BlockCycDist;;
 
 /* Use sorting. */
 use Sort;
