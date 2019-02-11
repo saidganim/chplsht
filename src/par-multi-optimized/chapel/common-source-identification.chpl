@@ -226,7 +226,7 @@ corrMatrix[i,j] = 0.0;
 
   if (writeOutput) {
     writeln("Writing output files...");
-    write2DRealArray(corrMatrix, "corrMatrix");
+    write2DRealArray(corrMatrixGlobal, "corrMatrix");
     // for now, also write the prnu noise pattern, can be removed
     // write2DRealArray(prnucomp, "prnu");
   }
