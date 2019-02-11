@@ -135,7 +135,7 @@ proc main() {
 
   
         // Rotating the second prnu image and representing it as matrix of complex numbers
-        for ii in 0..h - 1 do {
+        coforall ii in 0..h - 1 do {
           for jj in 0..w - 1 do {
             var newy = h - ii - 1;
             var newx = w - jj - 1;
