@@ -99,7 +99,7 @@ proc main() {
   
   /* Create a domain for an image and allocate the image itself */
   for i in 1..imageFileNames.size do  
-  on Locales[j] {
+  on Locales[i] {
      var n = imageFileNames.size;
 
   /* h, w will represent the height and width of an image or PRNU noise pattern 
