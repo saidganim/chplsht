@@ -199,6 +199,8 @@ proc main() {
         writeln(i - 1, " : Energy weighted " ,sum);
 
         on corrMatrix {
+        writeln(i - 1, " : Energy weighted " ,sum);
+
           corrMatrix[i,j] = maxVal * maxVal / sum;
         writeln(i - 1, " : Energy weighted " ,sum);
 
